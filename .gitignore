@@ -1,0 +1,6 @@
+static/js
+templates/errors
+Pipfile.lock
+Pipfile
+.vscode
+__pycache__

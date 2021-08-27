@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Youtube Playlist Analyzer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="icon" href="https://cdn.iconscout.com/icon/free/png-256/youtube-2690358-2232861.png">
+    <style>
+        html, 
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header style="background-color: #f3f3f3;">
+        <section class="section">
+            <div class="container">
+                <a href="/">
+                    <h1 class="title my-3 has-text-centered">
+                        <span class="icon">
+                            📽
+                        </span>
+                        Youtube Playlist Analyzer
+                    </h1>
+                </a>
+                <form method="POST">
+                    <div class="block mt-5">
+                        <div class="field is-grouped">
+
+                            <div class="control is-expanded">
+                                <input name="playlist_link" class="input is-large" type="text"
+                                    placeholder="youtube.com/playlist?list=ID" autofocus required>
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button has-background-black-ter has-text-white is-large">
+                                    <span class="icon">
+                                        📈
+                                    </span>
+                                    <span>Analyze</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="subtitle is-5">
+                    Paste a playlist link, playlist ID, or even a video link from the playlist!
+                </p>
+            </div>
+        </section>
+    </header>
+    {% if data %}
+
+    
+
+    <section class="mt-4 container">
+        <div class="columns is-multiline">
+
+            <!-- Duration Section -->
+            <div class="column no-scroll" style="height: 35em; overflow: scroll;">
+                <article class="message">
+                    <div class="message-header sticky">
+                        <p>
+                            <span class="icon mr-2 is-medium">
+                                ⌛
+                            </span>
+                            Duration ({{ data[1] }} videos analyzed)</p>
+                    </div>
+                    <div class="message-body">
+                        <div class="row">
+                            <div class="has-background-white pt-1 mb-4 has-text-centered" style="border: 2px dotted black;">
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">Total Duration</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["total_duration"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">Average Length of Video</div>
+                                        <div class="title is-5 has-text-weight-bold">{{ data[0]["average_length"] }}</div>
+                                    </div>
+                                </div>
+                                <!-- <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">Longest Video</div>
+                                        <div class="title is-5 has-text-weight-bold">10 hours, 15 minutes, 16
+                                            seconds</div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">Shortest Video</div>
+                                        <div class="title is-5 has-text-weight-bold">10 hours, 15 minutes, 16
+                                            seconds</div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="has-background-white pt-1 has-text-centered" style="border: 2px dotted black;">
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 1.25X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_1_25"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 1.5X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_1_5"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 1.75X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_1_75"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 2X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_2"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 2.25X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_2_25"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 2.5X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_2_5"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-item mb-4">
+                                    <div class="">
+                                        <div class="title is-6 has-text-black">At 3X</div>
+                                        <div class="title is-5 has-text-weight-bold">
+                                            {{ data[0]["at_3"] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Top Videos Section -->
+            <div class="column no-scroll is-three-fifths" style="height: 35em; overflow: scroll;">
+                <article class="message">
+                    <div class="message-header sticky">
+                        <span class="select">
+                            <select id="target">
+                                <option value="mostViewed" selected>👀 Most Viewed</option>
+                                <option value="mostLiked">👍 Most Liked</option>
+                                <option value="mostDisliked">👎 Most Disliked</option>
+                                <option value="comments">💬 Most Comments</option>
+                                <option value="latest">👶 Recently Uploaded</option>
+                                <option value="oldest">🧓 Oldest</option>
+                            </select>
+                        </span>
+
+                    </div>
+                    <div id="mostViewed" class="vis">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Views</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["most_viewed"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ "{:,}".format(video.views) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="mostLiked" class="is-hidden">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Likes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["most_liked"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ "{:,}".format(video.likes) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="mostDisliked" class="is-hidden">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Dislikes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["most_disliked"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ "{:,}".format(video.dislikes) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="comments" class="is-hidden">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["most_commented"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ "{:,}".format(video.comments) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="latest" class="is-hidden">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["recently_uploaded"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ video.published_at }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="oldest" class="is-hidden">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Position">Pos</abbr></th>
+                                    <th>Video</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for video in data[2]["oldest"] %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td><a href="{{ video.url }}" target="_blank">
+                                        {{ video.title }}
+                                    </a>
+                                    </td>
+                                    <td>{{ video.published_at }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </article>
+
+            </div>
+
+
+        </div>
+
+
+
+    </section>
+
+
+    <script>
+        document
+            .getElementById('target')
+            .addEventListener('change', function () {
+                'use strict';
+                let vis = document.querySelector('.vis'),   
+                    target = document.getElementById(this.value);
+                if (vis !== null) {
+                    vis.className = 'is-hidden';
+                }
+                if (target != null) {
+                    target.className = 'vis';
+                }
+
+        });
+
+    </script>
+
+
+    
+    {% endif %}
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Youtube Playlist Analyzer</strong> by <a href="https://abenezerbelachew.github.io">Abenezer Belachew (AB)</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+</body>
+
+</html>
