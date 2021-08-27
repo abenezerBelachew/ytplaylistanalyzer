@@ -10,6 +10,7 @@ google-api-python-client==2.18.0
 google-auth-httplib2==0.1.0
 google-auth==2.0.1; python_version >= '3.6'
 googleapis-common-protos==1.53.0; python_version >= '3.6'
+gunicorn
 httplib2==0.19.1
 idna==3.2; python_version >= '3'
 importlib-metadata==4.6.4; python_version < '3.8'
