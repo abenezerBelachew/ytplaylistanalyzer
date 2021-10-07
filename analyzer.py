@@ -62,7 +62,6 @@ def get_playlist_id(youtube_link):
 
 
 def analyze(playlist_id):
-    # "PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU"
     nextPageToken = None
     total_seconds = 0
     no_of_videos = 0
@@ -157,7 +156,6 @@ def analyze(playlist_id):
     time["at_3"] = duration_calculator(total_seconds/3)
 
     # Popularity
-    # TODO: Change the name from popular_videos to something else
     popular_videos = {}
     popular_videos["most_viewed"] = sorted(videos, key=lambda vid: vid['views'], reverse=True)
     popular_videos["most_liked"] =  sorted(videos, key=lambda vid: vid['likes'], reverse=True)
